@@ -1,4 +1,5 @@
 <?php
+    session_start();
     require_once  'connect/connect.php';
     require_once  'register-inc.php';
 ?>

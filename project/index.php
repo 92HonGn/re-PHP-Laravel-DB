@@ -2,7 +2,13 @@
     require_once 'header.php';
 ?>
 
-HOME
+<?php
+    if ( isset( $_SESSION('sessionId') ) ){
+        echo "你登入了";
+    }else{
+        echo "首頁";
+    }
+?>
 
 <?php
     require_once 'footer.php';
