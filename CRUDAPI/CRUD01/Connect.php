@@ -1,30 +1,30 @@
 <?php
-    class Connect {
+class Connect {
 
-        private $host = "127.0.0.1";
-        private $database_name = "";
-        private $username = "root";
-        private $password = "";
+	private $host = "127.0.0.1";
+	private $database_name = "";
+	private $username = "root";
+	private $password = "";
 
-        public $conn;
+	public $conn;
 
-        public function getConnection(){
-            $this->conn = null;
+	public function getConnection() {
+		$this->conn = null;
 
-            try{
+		try {
 
-                $this->conn = new PDO("mysql:host=" . $this->host . ";dbname=" . $this->database_name, $this->username, $this->password);
-                $this->conn->exec("set names utf8");
+			$this->conn = new PDO("mysql:host=" . $this->host . ";dbname=" . $this->database_name, $this->username, $this->password);
+			$this->conn->exec("set names utf8");
 
-            }catch(PDOException $exception){
+		} catch (PDOException $exception) {
 
-                echo "資料庫未連接" . $exception->getMessage();
+			echo "資料庫未連接" . $exception->getMessage();
 
-            }
+		}
 
-            return $this->conn;
+		return $this->conn;
 
-        }
+	}
 
-    }
+}
 ?>

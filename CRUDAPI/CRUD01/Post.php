@@ -1,5 +1,4 @@
 <?php
-
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json; charset=UTF-8");
 header("Access-Control-Allow-Methods: POST");
@@ -14,31 +13,17 @@ $db = $connect->getConnection();
 
 $item = new Employee($db);
 
-$item->id = isset($_GET['id']) ? $_GET['id'] : die();
+$data = json_decode(file_get_contents("php://input"));
 
-$item->getSingleEmployee();
+$item->name = $data->name;
+$item->email = $data->email;
+$item->age = $data->age;
+$item->designation = $data->designation;
+$item->created = date('Y-m-d H:i:s');
 
-if ($item->name != null) {
-
-	$emp_arr = array(
-		"id" => $item->id,
-		"name" => $item->name,
-		"email" => $item->email,
-		"age" => $item->age,
-		"designation" => $item->designation,
-		"created" => $item->created,
-	);
-
-	http_response_code(200);
-
-	echo json_encode($emp_arr);
-
+if ($item->createEmployee()) {
+	echo '創建成功';
 } else {
-
-	http_response_code(404);
-
-	echo json_encode("找不到");
-
+	echo '創建失敗';
 }
-
 ?>
